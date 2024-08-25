@@ -31,6 +31,16 @@
   <listener-class>listeners.AppListenerImpl</listener-class>
   </listener>
 
+  <context-param>
+      <param-name>recaptcha_url</param-name>
+      <param-value>https://www.google.com/recaptcha/api/siteverify</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>secret_key</param-name>
+    <param-value>6LfH75IoAAAAAAL0Rm9VS_NGDLyOGIOJX3Et0BI8</param-value>
+  </context-param>
+
   <welcome-file-list>
   <welcome-file>index.do</welcome-file>
   </welcome-file-list>

@@ -137,6 +137,8 @@ CREATE TABLE users
     constraint fk_users_status foreign key (status_id) references status (status_id),
     constraint fk_users_pincode foreign key (pincode_id) references pincode(pincode_id) 
 );
+alter table users alter user_type set default false;
+alter table users modify pincode_id int NULL;
 -- #######USERS#########
 
 -- #######WISHLIST#########

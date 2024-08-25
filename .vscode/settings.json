@@ -1,6 +1,10 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Tomcat 9.0\\lib\\servlet-api.jar"
+        "c:\\Tomcat 9.0\\lib\\servlet-api.jar",
+        "c:\\Tomcat 9.0\\lib\\javax.json-1.1.2.jar",
+        "c:\\Tomcat 9.0\\lib\\javax.json-api-1.1.2.jar",
+        "c:\\Tomcat 9.0\\lib\\javax.mail-1.6.2.jar",
+        "c:\\Tomcat 9.0\\lib\\jasypt-1.9.3.jar"
     ]
 }

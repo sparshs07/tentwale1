@@ -2,7 +2,13 @@ package models;
 
 import java.sql.*;
 
+import javax.servlet.ServletException;
+
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 public class User {
+   static StrongPasswordEncryptor spe=new StrongPasswordEncryptor();
+
     //Properties
     private Integer userId;
     private String name;
@@ -22,8 +28,115 @@ public class User {
 
     }
 
+    public User(String name,String email,String password,String phone,String otp){
+        this.name=name;
+        this.email=email;
+        this.password=password;
+        this.phone=phone;
+        this.otp=otp;
+    }
+
     
     //Other Methods
+
+    public static boolean signinUser(String email,String password){
+        boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://local:3306/tentwaledb?user=root&password=1234");
+            String query="select email,password from users where email=? and password=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,email);
+            ps.setString(2,password);
+            ResultSet rs=ps.executeQuery();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public static boolean checkPhone(String phone){
+        boolean flag=false;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select phone from users where phone=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,phone);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                flag=true;
+            }
+            con.close();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public  boolean signupUser(){
+        boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="insert into users (name,email,password,phone,otp) value (?,?,?,?,?)";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,name);
+            ps.setString(2,email);
+            ps.setString(3,spe.encryptPassword(password));
+            ps.setString(4,phone);
+            ps.setString(5,otp);
+
+           int rs= ps.executeUpdate();
+           if(rs==1){
+            flag=true;
+           }
+            con.close();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public static boolean checkEmail(String email){
+        boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select email from users where email=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,email);
+            ResultSet rs=ps.executeQuery();
+
+            if(rs.next()){
+                flag=true;
+            }
+            con.close();
+
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        
+        return flag;
+    }
+
+    public static void setEmailOTP(String name,String email,String otp){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="insert into users (name,email,otp) value (?,?,?)";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,name);
+            ps.setString(2,email);
+            ps.setString(3,otp);
+            
+            ps.executeUpdate();
+            con.close();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     //Getter/Setters
 
