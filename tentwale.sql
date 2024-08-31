@@ -139,6 +139,9 @@ CREATE TABLE users
 );
 alter table users alter user_type set default false;
 alter table users modify pincode_id int NULL;
+alter table users alter status_id set default 1;
+alter table users add column address char(100) NULL;
+alter table users add column tentwala_name char(100) NULL;
 -- #######USERS#########
 
 -- #######WISHLIST#########

@@ -20,6 +20,10 @@ public class Membership{
 
     }
 
+    public Membership(Integer membershipId){
+        this.membershipId=membershipId;
+    }
+
     public Membership(Integer membershipId,String name){
         this.membershipId=membershipId;
         this.name=name;

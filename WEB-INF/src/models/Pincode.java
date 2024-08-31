@@ -11,6 +11,11 @@ public class Pincode {
     public Pincode(){
 
     }
+
+    public Pincode(Integer pincodeId){
+        this.pincodeId=pincodeId;
+    }
+
     public Pincode(Integer pincodeId,Integer pin){
         this.pincodeId=pincodeId;
         this.pin=pin;

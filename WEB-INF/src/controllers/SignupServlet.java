@@ -44,11 +44,14 @@ public class SignupServlet extends HttpServlet {
             String c5=request.getParameter("c5");
             String c6=request.getParameter("c6");
             String otp=c1+c2+c3+c4+c5+c6;
+
+            int status=1;
             
             User user=new User(name,email,password,phone,otp);
             boolean fl=  user.signupUser();
             System.out.println(fl);
             if(fl){
+                User.setStatus(status,email);
                 nextPage="signin.jsp";
             }
         }

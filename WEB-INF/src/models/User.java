@@ -2,8 +2,6 @@ package models;
 
 import java.sql.*;
 
-import javax.servlet.ServletException;
-
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 public class User {
@@ -17,6 +15,8 @@ public class User {
     private String pic;
     private String phone;
     private String otp;
+    private String address;    
+    private String tentwalaName;
     private Integer trustPoints;
     private Boolean userType;
     private Membership membership;
@@ -26,6 +26,11 @@ public class User {
      //Constructors
     public User(){
 
+    }
+
+    public User(String email,String password){
+        this.email=email;
+        this.password=password;
     }
 
     public User(String name,String email,String password,String phone,String otp){
@@ -39,20 +44,83 @@ public class User {
     
     //Other Methods
 
-    public static boolean signinUser(String email,String password){
+    public static boolean updatePassword(String email,String password){
         boolean flag=false;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con=DriverManager.getConnection("jdbc:mysql://local:3306/tentwaledb?user=root&password=1234");
-            String query="select email,password from users where email=? and password=?";
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="update users set password=? where email=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,spe.encryptPassword(password));
+            ps.setString(2,email);
+            int res=ps.executeUpdate();
+
+            if(res==1){
+                flag=true;
+            }
+            con.close();
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    public  int signinUser(){
+
+        //-1 : wrong password
+        //0 :  
+        int statusId=0;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select user_id,u.name,email,password,pic,phone,otp,address,tentwala_name,trust_points,user_type,membership_id,u.status_id,pincode_id,s.status_id,s.name from users as u inner join status as s where email=? and u.status_id=s.status_id";
             PreparedStatement ps=con.prepareStatement(query);
             ps.setString(1,email);
-            ps.setString(2,password);
             ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                statusId=rs.getInt("status_id");
+                if(statusId==1){
+                    if(spe.checkPassword(password,rs.getString("password"))){
+                        password=null;
+                        userId=rs.getInt("user_id");
+                        name=rs.getString("name");
+                        email=rs.getString("email");
+                        pic=rs.getString("pic");
+                        phone=rs.getString("phone");
+                        otp=rs.getString("otp");
+                        address=rs.getString("address");
+                        tentwalaName=rs.getString("tentwala_name");
+                        trustPoints=rs.getInt("trust_points");
+                        userType=rs.getBoolean("user_type");
+                        membership=new Membership(rs.getInt("membership_id"));
+                        status=new Status(rs.getInt("status_id"),rs.getString(14));
+                        pincode=new Pincode(rs.getInt("pincode_id"));
+                    }else{
+                        statusId=-1;
+                    }
+                }
+            }
+            con.close();
         }catch(ClassNotFoundException|SQLException e){
             e.printStackTrace();
         }
-        return flag;
+        return statusId;
+    }
+
+    public static void setStatus(Integer status,String email){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="update users set status_id=? where email=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1,status);
+            ps.setString(2,email);
+            ps.executeUpdate();
+            con.close();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public static boolean checkPhone(String phone){
@@ -210,6 +278,22 @@ public class User {
 
     public void setUserType(Boolean userType) {
         this.userType = userType;
+    }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public void setAddress(String address){
+        this.address=address;
+    }
+
+    public String getTentwalaName(){
+        return tentwalaName;
+    }
+
+    public void setTentwalaName(){
+        this.tentwalaName=tentwalaName;
     }
 
     public Membership getMembership() {
