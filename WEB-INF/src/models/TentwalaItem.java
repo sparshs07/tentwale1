@@ -9,8 +9,11 @@ public class TentwalaItem {
     private Integer unitPrice;
     private Item item;
     private User userTentwale;
+    private String tentwalaItemPic;
 
-     //Constructors
+     
+
+    //Constructors
     public TentwalaItem(){
 
     }
@@ -51,5 +54,12 @@ public class TentwalaItem {
         this.userTentwale = userTentwale;
     }
 
-   
+    public String getTentwalaItemPic() {
+        return tentwalaItemPic;
+    }
+
+    public void setTentwalaItemPic(String tentwalaItemPic) {
+        this.tentwalaItemPic = tentwalaItemPic;
+    }
+
 }

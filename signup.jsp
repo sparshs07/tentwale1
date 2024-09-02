@@ -109,7 +109,7 @@
           
         </div>
         <p class="hidden mt-1 text-sm text-red-500 dark:text-red-300" id="otp_error">Please enter valid OTP!!</p>
-        <p class="hidden mt-1 text-sm text-green-700 dark:text-green-700" id="otp_sent_message">OTP Sent!</p>
+        <p class="hidden mt-1 text-sm text-green-700 dark:text-green-700" id="otp_sent_message">OTP Sent To Your Email!</p>
   <!-- <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Please introduce the 6 digit code we sent via email.</p> -->
 
 

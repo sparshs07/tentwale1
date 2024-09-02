@@ -69,7 +69,7 @@
     </div>
   
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="signin.do" method="POST">
+      <form class="space-y-6" action="signin.do" id="form" method="POST">
 
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
@@ -166,17 +166,30 @@
   </script>
 <!-- ##############DROP DOWN PROFILE OFF FROM HEADER#################### -->
 
+<!-- #######################CHECK USER TYPE################# -->
 <!-- #################REMOVING ERROR MESSAGE######################### -->
   <script>
     let error_message=document.querySelector("#error_message");
     let email=document.querySelector('#email1');
     let password=document.querySelector('#password1');
+    
+
+    let checkUserType=async ()=>{
+      let response=await fetch('check_user_type.do?email='+email.value);
+      let result=await response.text();
+      return result;
+    }
 
     email.addEventListener('focus',()=>{
       error_message.classList.add('hidden');
     })
+
+    
   </script>
 <!-- #################REMOVING ERROR MESSAGE######################### -->
+<!-- #######################CHECK USER TYPE################# -->
+
+  
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>

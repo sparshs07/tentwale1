@@ -21,7 +21,7 @@ public class User {
     private Boolean userType;
     private Membership membership;
     private Status status;
-    private Pincode pincode;
+    private String pincode;
 
      //Constructors
     public User(){
@@ -43,6 +43,53 @@ public class User {
 
     
     //Other Methods
+
+    public static boolean checkUserType(String email){
+        boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select user_type from users where email=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,email);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+               flag=  rs.getBoolean("user_type");
+            }
+            con.close();
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    public static boolean signupTentwala(String tentwalaName,String address,String pincode,String email,boolean userType){
+        boolean flag=false;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="UPDATE users SET tentwala_name = ?, address = ?, pincode = ?, user_type=? WHERE email = ?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,tentwalaName);
+            ps.setString(2,address);
+            ps.setString(3,pincode);
+            ps.setBoolean(4, userType);
+            ps.setString(5,email);
+
+            int res=ps.executeUpdate();
+            
+            if(res==1){
+                flag=true;
+            }
+            con.close();
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
 
     public static boolean updatePassword(String email,String password){
         boolean flag=false;
@@ -74,7 +121,7 @@ public class User {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
-            String query="select user_id,u.name,email,password,pic,phone,otp,address,tentwala_name,trust_points,user_type,membership_id,u.status_id,pincode_id,s.status_id,s.name from users as u inner join status as s where email=? and u.status_id=s.status_id";
+            String query="select user_id,u.name,email,password,pic,phone,otp,address,tentwala_name,trust_points,user_type,membership_id,u.status_id,pincode,s.status_id,s.name from users as u inner join status as s where email=? and u.status_id=s.status_id";
             PreparedStatement ps=con.prepareStatement(query);
             ps.setString(1,email);
             ResultSet rs=ps.executeQuery();
@@ -95,7 +142,7 @@ public class User {
                         userType=rs.getBoolean("user_type");
                         membership=new Membership(rs.getInt("membership_id"));
                         status=new Status(rs.getInt("status_id"),rs.getString(14));
-                        pincode=new Pincode(rs.getInt("pincode_id"));
+                        pincode=rs.getString("pincode");
                     }else{
                         statusId=-1;
                     }
@@ -292,7 +339,7 @@ public class User {
         return tentwalaName;
     }
 
-    public void setTentwalaName(){
+    public void setTentwalaName(String tentwalaName){
         this.tentwalaName=tentwalaName;
     }
 
@@ -312,14 +359,14 @@ public class User {
         this.status = status;
     }
 
-    public Pincode getPincode() {
+    public String getPincode() {
         return pincode;
     }
 
-    public void setPincode(Pincode pincode) {
+    public void setPincode(String pincode) {
         this.pincode = pincode;
     }
 
-   
+
     
 }

@@ -13,6 +13,7 @@ import java.io.*;
 
 import models.User;
 
+
 @WebServlet("/tentwala_signup.do")
 public class TentwalaSignupServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
@@ -27,5 +28,32 @@ public class TentwalaSignupServlet extends HttpServlet {
         else{
             response.sendRedirect(nextPage);
         }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
+        HttpSession session=request.getSession();
+
+        User user=(User)session.getAttribute("user");
+
+        String email=request.getParameter("email");
+        String pincode=request.getParameter("pincode");
+        String tentwalaName=request.getParameter("tentwala_name");
+        String tentwalaAddress=request.getParameter("tentwala_address");
+
+        String nextPage="error.jsp";
+        boolean userType=true;
+
+        if(user!=null){
+            boolean f=User.signupTentwala(tentwalaName,tentwalaAddress,pincode,email,userType);
+            if(f){
+                user.setTentwalaName(tentwalaName);
+                user.setAddress(tentwalaAddress);
+                user.setPincode(pincode);
+                user.setUserType(userType);
+                nextPage="tentwala_home_profile.jsp";
+            }
+        }        
+        request.getRequestDispatcher(nextPage).forward(request,response);
+
     }
 }

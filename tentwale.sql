@@ -170,6 +170,7 @@ CREATE TABLE tentwala_items
     constraint fk_tentwalaitems_items foreign key (item_id) references items(item_id),
     constraint fk_tentwala_items_user2 foreign key(user_tentwale_id) references users(user_id) 
 );
+alter table tentwala_items add column tentwala_item_pic char(255) null;
 -- #######TENTWALA_ITEMS#########
 
 -- #######INVOICE#########
