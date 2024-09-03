@@ -15,8 +15,8 @@ import models.Item;
 @WebServlet("/item_description.do")
 public class ItemDescriptionServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
-        String name=request.getParameter("item_name");
-        String description=Item.getDescription(name);
+        Integer itemId=Integer.parseInt(request.getParameter("item_id"));
+        String description=Item.getDescription(itemId);
 
         response.getWriter().write(description);
     }

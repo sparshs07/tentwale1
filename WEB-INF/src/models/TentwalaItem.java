@@ -20,6 +20,29 @@ public class TentwalaItem {
 
     //Other Methods
 
+    public static boolean addItem(Integer itemId,Integer totalQuantity,Integer unitPrice,Integer userId){
+        boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="insert into tentwala_items (item_id,total_quantity,unit_price,user_tentwale_id) value (?,?,?,?)";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1, itemId);
+            ps.setInt(2, totalQuantity);
+            ps.setInt(3, unitPrice);
+            ps.setInt(4, userId);
+
+            int x=ps.executeUpdate();
+            if(x==1){
+                flag=true;
+            }
+            con.close();
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     //Getter/Setter
 
 

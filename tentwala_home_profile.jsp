@@ -43,9 +43,10 @@
 
 <!-- -----------RIGHT SIDE--------------- -->
 <div class="col-span-2 flex min-h-full flex-col justify-center px-6 pt-24 pb-24 lg:px-8">
-<form class="max-w-lg ml-40">
+<form class="max-w-lg ml-40" action="add_tentwala_item.do" method="post">
     <div class="relative z-0 w-full mb-5 group">
-        <select name="floating_departments" id="floating_departments" class="block py-2.5 px-0 w-full text-lg text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required>
+      
+        <select name="select_item" id="floating_departments" class="block py-2.5 px-0 w-full text-lg text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required>
           <option value="" disabled selected>Select Item</option>
 
           <c:forEach var="item_type" items="${item_types}" varStatus="cn">
@@ -53,7 +54,7 @@
 
           <c:forEach var="item" items="${items}" varStatus="cn">
             <c:if test="${item_type.itemTypeId == item.itemType.itemTypeId}">
-            <option value="${item.name}" name="${item_type.name}">${item.name}</option>
+            <option value="${item.itemId}">${item.name}</option>
             </c:if>
           </c:forEach>
 
@@ -63,18 +64,21 @@
       </div>
 
       <div class="relative z-0 w-full mb-5 group">
-        <textarea name="floating_message" id="floating_message" readonly class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required></textarea>
+        <textarea  id="floating_message" readonly class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required></textarea>
         <label for="floating_message" class="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Item Description</label>
       </div>
 
     <div class="relative z-0 w-full mb-5 group">
-        <input type="number" name="floating_number" id="floating_number" class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="floating_number" class="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Item Quantity</label>
+        <input type="number" name="item_quantity" id="floating_number" autocomplete="off" class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="item_quantity" class="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Item Quantity</label>
     </div>
 
     <div class="relative z-0 w-full mb-5 group">
-        <input type="text" name="floating_text" id="floating_text" class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="floating_text" class="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price per Item</label>
+        <input type="text" name="price_per_item" id="floating_text" autocomplete="off" class="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="price_per_item" class="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price per Item</label>
+    </div>
+    <div>
+      <input hidden type="text" name="user_tentwala_id" value="${user.userId}" >
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Item</button>
 </form>
@@ -102,7 +106,7 @@
         let floating_message=document.querySelector("#floating_message");
 
         let get_description=async ()=>{
-          let response=await fetch('item_description.do?item_name='+floating_departments.value);
+          let response=await fetch('item_description.do?item_id='+floating_departments.value);
           let result=await response.text();
           return result;
         }
@@ -121,7 +125,15 @@
 
     <script>
       let home=document.querySelector("#home")
-      home.href="tentwala_home_profile.do"
+      home.href="tentwala_home.do"
+
+      let about=document.querySelector("#about")
+      about.innerText="Add Items"
+      about.href="tentwala_home_profile.do"
+
+      let services=document.querySelector("#services")
+      services.innerText="Your Items"
+      services.href="tentwala_home_profile.do"
     </script>
 
     <!-- ----------------HIDDING----------------------- -->

@@ -33,14 +33,14 @@ public class Item {
 
     //Other Methods
 
-    public static String getDescription(String name){
+    public static String getDescription(Integer itemId){
         String description =null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
-            String query="select description from items where name=?";
+            String query="select description from items where item_id=?";
             PreparedStatement ps=con.prepareStatement(query);
-            ps.setString(1, name);
+            ps.setInt(1, itemId);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 description=rs.getString("description");

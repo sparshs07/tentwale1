@@ -36,7 +36,7 @@ public class SigninServlet extends HttpServlet {
             case 1:
                 session.setAttribute("user", user);
                 if(user.getUserType()){
-                    nextPage="tentwala_home_profile.do";
+                    nextPage="tentwala_home.do";
                 }else{
                     nextPage="home_profile.do";
                 }
