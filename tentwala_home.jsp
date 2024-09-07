@@ -56,18 +56,21 @@
       </script>
     <!-- --------------------DESCRIPTION--------------------- -->
 
-    <script>
-      let home=document.querySelector("#home")
-      home.href="tentwala_home.do"
+   <!-- --------------------------MENU BUTTON------------------------ -->
+<script>
+  let home=document.querySelector("#home")
+  home.href="tentwala_home.do"
+  
+  let about=document.querySelector("#about")
+  about.innerText="Add Items"
+  about.href="tentwala_home_profile.do"
+  
+  let services=document.querySelector("#services")
+  services.innerText="Your Items"
+  services.href="your_items.do"
+  </script>
+<!-- --------------------------MENU BUTTON------------------------ -->
 
-      let about=document.querySelector("#about")
-      about.innerText="Add Items"
-      about.href="tentwala_home_profile.do"
-
-      let services=document.querySelector("#services")
-      services.innerText="Your Items"
-      services.href="tentwala_home_profile.do"
-    </script>
 
     <!-- ----------------HIDDING----------------------- -->
     <script>
