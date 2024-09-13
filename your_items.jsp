@@ -16,49 +16,59 @@
 
 <!-- ##############################BODY############################ -->
   
-
-<div class="flex flex-wrap justify-start">
-<c:forEach var="tentwala_item" items="${tentwala_items}" varStatus="cn">
-    <div class="mx-5 my-8 flex flex-col  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl">
-        <a href="#">
-            <img class="rounded-t-lg" src="static/images/backdrop.jpg" alt="" />
-        </a>
-        <div class="p-5 max-w-64 max-h-72">
-            <a href="#">
-                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">${tentwala_item.item.name}</h5>
-            </a>
-            <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400">${tentwala_item.item.description}</p>
-            <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"> <b>Quantity: </b>${tentwala_item.totalQuantity}</p>
-            <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"><b>Unit Price(Rs.): </b>${tentwala_item.unitPrice}</p>
-            
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Edit Item
-            </a>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Delete Item
-            </a>
+<div class="max-w-7xl ml-32 mt-9 mb-9">
+    <c:forEach var="your_item_type" items="${your_item_types}" varStatus="cn">
+        <div id="accordion-collapse-${cn.count}" data-accordion="close" data-active="false">
+            <h2 id="item${cn.count}">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body${cn.count}" aria-expanded="true" aria-controls="accordion-collapse-body${cn.count}">
+                    <span></span>
+                    <h3 class="text-5xl font-extrabold dark:text-white">${your_item_type.name}</h3>                
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                </button>
+            </h2>
+            <div id="accordion-collapse-body${cn.count}" class="hidden" aria-labelledby="item${cn.count}">
+                <div class="flex flex-wrap justify-start bg-blue-100">
+                    <c:forEach var="tentwala_item" items="${tentwala_items}" varStatus="cm">
+                        <c:if test="${your_item_type.itemTypeId==tentwala_item.item.itemType.itemTypeId}">
+                            <div class="mx-5 my-8 flex flex-col  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl">
+                                <a href="#">
+                                    <img class="rounded-t-lg" src="static/images/backdrop.jpg" alt="" />
+                                </a>
+                                <div class="p-5 max-w-64 max-h-72">
+                                    <a href="#">
+                                        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">${tentwala_item.item.name}</h5>
+                                    </a>
+                                    <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400">${tentwala_item.item.description}</p>
+                                    <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"> <b>Quantity: </b>${tentwala_item.totalQuantity}</p>
+                                    <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"><b>Unit Price(Rs.): </b>${tentwala_item.unitPrice}</p>
+                                    
+                                    <a href="edit_tentwala_item.do?item_id=${tentwala_item.item.name}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Edit Item
+                                    </a>
+                                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Delete Item
+                                    </a>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
-    </div>
-</c:forEach>
+    </c:forEach>
 </div>
-
-<c:forEach var="your_item" items="${your_item_types}" varStatus="cn">
-    
-<h1 class="text-5xl font-extrabold dark:text-white">${your_item.name}</h1>
-  
-</c:forEach>
-
-
 
 <!-- ##############################BODY############################ -->
 
 
-    <!-- #################FOOTER#################### -->
-    <div class="min-h-screen flex flex-col">
-        <div class="fixed bottom-0 left-0 right-0">
+<!-- #################FOOTER#################### -->
+    <!-- <div class="min-h-screen flex flex-col">
+        <div class="fixed bottom-0 left-0 right-0"> -->
             <c:import url="footer.jsp" />
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
     <!-- #################FOOTER#################### -->
 
     

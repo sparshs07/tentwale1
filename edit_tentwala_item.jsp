@@ -8,11 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-
-
 </head>
 <body>
     <!-- ##############HEADER################## -->
@@ -21,40 +16,36 @@
 
 <!-- ##############################BODY############################ -->
 
-
+           
 
 <div class="grid grid-cols-3 gap-4">
 <!-- -----------LFET SIDE--------------- -->
-
-
-<div class=" ml-40 mx-auto my-auto ">
-  <!-- <label for="cover-photo" class="block text-lg font-medium leading-6 text-gray-900">Cover photo</label> -->
-  <div class="h-96 w-96 mt-2 flex justify-center rounded-lg px-6 py-2">
-    <div class="text-center">
-      <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-      </svg>
-      <div class="mt-4 flex text-lg leading-6 text-gray-600">
-        <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-          <!-- <span>Upload image of item</span> -->
-          <!-- <input id="file-upload" name="file-upload" type="file" class="dropzone hidden"> -->
-          <form action="upload_pic.do" method="post" class="dropzone rounded-lg border border-dashed border-gray-900/25" id="pic-upload-form" ></form>
-        </label>
-        <!-- <p class="pl-1">or drag and drop</p> -->
+    <div class=" ml-40 mx-auto my-auto ">
+        <!-- <label for="cover-photo" class="block text-lg font-medium leading-6 text-gray-900">Cover photo</label> -->
+        <div class="h-96 w-96 mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+          <div class="text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+            </svg>
+            <div class="mt-4 flex text-lg leading-6 text-gray-600">
+              <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                <span>Upload image of item</span>
+                <input id="file-upload" name="file-upload" type="file" class="sr-only">
+              </label>
+              <p class="pl-1">or drag and drop</p>
+            </div>
+            <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+          </div>
+        </div>
       </div>
-      <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-    </div>  
-  </div>
-</div>
 <!-- -----------LFET SIDE--------------- -->
 
 
 <!-- -----------RIGHT SIDE--------------- -->
 <div class="col-span-2 flex min-h-full flex-col justify-center px-6 pt-24 pb-24 lg:px-8">
 <form class="max-w-lg ml-40" action="add_tentwala_item.do" method="post">
-
-  <div class="relative z-0 w-full mb-5 group">
-    
+    <div class="relative z-0 w-full mb-5 group">
+      
         <select name="select_item" id="floating_departments" class="block py-2.5 px-0 w-full text-lg text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required>
           <option value="" disabled selected>Select Item</option>
 
@@ -89,10 +80,11 @@
     <div>
       <input hidden type="text" name="user_tentwala_id" value="${user.userId}" >
     </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Item</button>
-  </form>
-  </div>
-  <!-- -----------RIGHT SIDE--------------- -->
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Item</button>
+</form>
+</div>
+<!-- -----------RIGHT SIDE--------------- -->
+
 </div>
 
 
@@ -153,56 +145,6 @@
         want_bec_tentw.classList.add("hidden");
     </script>
     <!-- ----------------HIDDING----------------------- -->
-
-    <script>
-      // Initialize Dropzone with custom thumbnail dimensions
-      let picUploadForm=document.querySelector('#pic-upload-form')
-      Dropzone.options.picUploadForm = {
-        maxFilesize: 5,
-        maxFiles:1,
-        init: function() {
-        this.on("addedfile", function(file) {
-          // Remove previous file if any
-          if (this.files.length > 1) {
-            this.removeFile(this.files[0]);
-          }
-        });
-
-        this.on("thumbnail", function(file, dataUrl) {
-          // Set the desired width and height for the displayed image
-          var thumbnail = file.previewElement.querySelector(".dz-image img");
-          var thumbnailn = file.previewElement.querySelector(".dz-image");
-          thumbnail.style.width = "200px";
-          thumbnail.style.height = "200px";
-
-          thumbnailn.style.width = "200px";
-          thumbnailn.style.height = "200px";
-          
-        });
-
-        this.on("error", function(file, errorMessage, xhr) {
-
-      // You can display a more user-friendly message to the user if needed
-      if (xhr && xhr.status === 0) {
-        alert("Server not reachable.Please try again to upload image.");
-      } else if (xhr && xhr.status === 413) {
-        alert("File size exceeds the maximum limit of 5 MB.");
-      } else {
-        alert("An error occurred during the file upload. Please try again.");
-      }
-    });
-        
-        // other options and callbacks go here
-      }
-        // other options and callbacks go here
-      };
-    </script>
-  
-  
-  
-  
-  
-  
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

@@ -20,11 +20,7 @@ public class Item {
 
     
 
-    public Item(Integer itemId,String name,String description){
-        this.itemId=itemId;
-        this.name=name;
-        this.description=description;
-    }
+    // 
 
     public Item(Integer itemId,String name,String description,ItemType itemType){
         this.itemId=itemId;

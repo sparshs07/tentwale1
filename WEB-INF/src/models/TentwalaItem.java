@@ -41,7 +41,7 @@ public class TentwalaItem {
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
-                tentwalaItem.add(new TentwalaItem(rs.getInt("tentwala_item_id"),new Item(rs.getInt("item_id"),rs.getString("name"),rs.getString("description")),rs.getInt("total_quantity"),rs.getInt("unit_price"),rs.getString("tentwala_item_pic")));
+                tentwalaItem.add(new TentwalaItem(rs.getInt("tentwala_item_id"),new Item(rs.getInt("item_id"),rs.getString("name"),rs.getString("description"),new ItemType(rs.getInt("item_type_id"))),rs.getInt("total_quantity"),rs.getInt("unit_price"),rs.getString("tentwala_item_pic")));
             }
         }catch(ClassNotFoundException|SQLException e){
             e.printStackTrace();

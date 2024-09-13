@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -52,6 +53,11 @@ public class SignupServlet extends HttpServlet {
             System.out.println(fl);
             if(fl){
                 User.setStatus(status,email);
+                String uploadLocation = getServletContext().getRealPath("/WEB-INF/uploads");
+
+                File userFolder = new File(uploadLocation, email);
+                System.out.println(userFolder);
+                userFolder.mkdir();
                 nextPage="signin.jsp";
             }
         }
