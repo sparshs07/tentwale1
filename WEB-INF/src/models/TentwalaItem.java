@@ -50,17 +50,18 @@ public class TentwalaItem {
         return tentwalaItem;
     }
 
-    public static boolean addItem(Integer itemId,Integer totalQuantity,Integer unitPrice,Integer userId){
+    public static boolean addItem(Integer itemId,Integer totalQuantity,Integer unitPrice,Integer userId,String tentwalaItemPic){
         boolean flag=false;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
-            String query="insert into tentwala_items (item_id,total_quantity,unit_price,user_tentwale_id) value (?,?,?,?)";
+            String query="insert into tentwala_items (item_id,total_quantity,unit_price,user_tentwale_id,tentwala_item_pic) value (?,?,?,?,?)";
             PreparedStatement ps=con.prepareStatement(query);
             ps.setInt(1, itemId);
             ps.setInt(2, totalQuantity);
             ps.setInt(3, unitPrice);
             ps.setInt(4, userId);
+            ps.setString(5,tentwalaItemPic);
 
             int x=ps.executeUpdate();
             if(x==1){

@@ -31,6 +31,24 @@ public class Item {
 
     //Other Methods
 
+    public static Integer getTypeId(Integer itemId){
+        Integer typeId=0;
+         try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select item_type_id from items where item_id=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1, itemId);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                typeId=rs.getInt("item_type_id");
+            }
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        return typeId;
+    }
+
     public static String getDescription(Integer itemId){
         String description =null;
         try{

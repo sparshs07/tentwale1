@@ -15,7 +15,7 @@
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white"><c:out value="${user.name}" /></span>
+            <span class="block text-sm text-gray-900 dark:text-white" id="display_name"><c:out value="${user.name}" /></span>
             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><c:out value="${user.email}" /></span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
@@ -48,14 +48,16 @@
         <li>
           <a href="#" id="about" class="block py-2 px-1 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
         </li>
-        <li>
-          <a href="#" id="services" class="block py-2 px-1 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-        </li>
+       
         <c:if test="${not empty user}">
             <li>
               <a href="want_to_become_tentwala.jsp" id="want_bec_tentw" class="block py-2 px-1 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Want to become a TentWala?</a>
             </li>
         </c:if>
+
+        <li>
+          <a href="#" id="services" class="block py-2 px-1 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+        </li>
         
       </ul>
     </div>

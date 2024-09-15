@@ -38,7 +38,8 @@
         <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
           <!-- <span>Upload image of item</span> -->
           <!-- <input id="file-upload" name="file-upload" type="file" class="dropzone hidden"> -->
-          <form action="upload_pic.do" method="post" class="dropzone rounded-lg border border-dashed border-gray-900/25" id="pic-upload-form" ></form>
+          <form action="upload_pic.do" method="post" class="dropzone rounded-lg border border-dashed border-gray-900/25" id="pic-upload-form" >
+          </form>
         </label>
         <!-- <p class="pl-1">or drag and drop</p> -->
       </div>
@@ -88,6 +89,7 @@
     </div>
     <div>
       <input hidden type="text" name="user_tentwala_id" value="${user.userId}" >
+      <input hidden type="text" name="pic_name" id="pic_name" value="" >
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Item</button>
   </form>
@@ -154,14 +156,17 @@
     </script>
     <!-- ----------------HIDDING----------------------- -->
 
+<!-- -----------------DROPZONE----------------------- -->
     <script>
       // Initialize Dropzone with custom thumbnail dimensions
       let picUploadForm=document.querySelector('#pic-upload-form')
+      let pic_name=document.querySelector("#pic_name")
       Dropzone.options.picUploadForm = {
         maxFilesize: 5,
         maxFiles:1,
         init: function() {
         this.on("addedfile", function(file) {
+          pic_name.value=file.name
           // Remove previous file if any
           if (this.files.length > 1) {
             this.removeFile(this.files[0]);
@@ -197,12 +202,17 @@
         // other options and callbacks go here
       };
     </script>
+
+    <!-- ------------------Display Tentwala Name------------------ -->
+    <script>
+      let display_name=document.querySelector("#display_name");
+      let tentwala_name="${user.tentwalaName}"
+      display_name.innerHTML=tentwala_name
+    </script>
+    <!-- ------------------Display Tentwala Name------------------ -->
+
   
-  
-  
-  
-  
-  
+<!-- -----------------DROPZONE----------------------- -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

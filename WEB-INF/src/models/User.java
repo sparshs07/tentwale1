@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
@@ -28,6 +29,14 @@ public class User {
 
     }
 
+    public User(Integer userId,String email,String phone,String address,String tentwalaName){
+        this.userId=userId;
+        this.email=email;
+        this.phone=phone;
+        this.address=address;
+        this.tentwalaName=tentwalaName;
+    }
+
     public User(String email,String password){
         this.email=email;
         this.password=password;
@@ -43,6 +52,28 @@ public class User {
 
     
     //Other Methods
+
+    public static ArrayList<User> getTentwaleDetails(String pincode){
+        ArrayList<User> userTentwaleDetails=new ArrayList<>();
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select * from users where pincode=? and user_type=1";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1,pincode);
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                userTentwaleDetails.add(new User(rs.getInt("user_id"),rs.getString("email"),rs.getString("phone"),rs.getString("address"),rs.getString("tentwala_name")));
+            }
+
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return userTentwaleDetails;
+    }
 
     public static boolean checkUserType(String email){
         boolean flag=false;

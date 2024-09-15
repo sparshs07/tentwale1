@@ -56,8 +56,9 @@ public class SignupServlet extends HttpServlet {
                 String uploadLocation = getServletContext().getRealPath("/WEB-INF/uploads");
 
                 File userFolder = new File(uploadLocation, email);
-                System.out.println(userFolder);
+                
                 userFolder.mkdir();
+               
                 nextPage="signin.jsp";
             }
         }

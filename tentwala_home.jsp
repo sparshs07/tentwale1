@@ -33,29 +33,7 @@
     </div>
     <!-- #################FOOTER#################### -->
 
-    <!-- --------------------DESCRIPTION--------------------- -->
-      <script>
-        let floating_departments=document.querySelector("#floating_departments");
-        let floating_message=document.querySelector("#floating_message");
-
-        let get_description=async ()=>{
-          let response=await fetch('item_description.do?item_id='+floating_departments.value);
-          let result=await response.text();
-          return result;
-        }
-
-        floating_departments.addEventListener('blur',()=>{
-          get_description().then((data)=>{
-            console.log(data);
-           floating_message.innerText=data;
-          }).catch((error)=>{
-            console.log(error);
-          })
-        })
-
-      </script>
-    <!-- --------------------DESCRIPTION--------------------- -->
-
+   
    <!-- --------------------------MENU BUTTON------------------------ -->
 <script>
   let home=document.querySelector("#home")
@@ -78,6 +56,15 @@
         want_bec_tentw.classList.add("hidden");
     </script>
     <!-- ----------------HIDDING----------------------- -->
+
+    <!-- ------------------Display Tentwala Name------------------ -->
+    <script>
+      let display_name=document.querySelector("#display_name");
+      let tentwala_name="${user.tentwalaName}"
+      display_name.innerHTML=tentwala_name
+    </script>
+    <!-- ------------------Display Tentwala Name------------------ -->
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

@@ -33,13 +33,13 @@
                     <c:forEach var="tentwala_item" items="${tentwala_items}" varStatus="cm">
                         <c:if test="${your_item_type.itemTypeId==tentwala_item.item.itemType.itemTypeId}">
                             <div class="mx-5 my-8 flex flex-col  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl">
-                                <a href="#">
-                                    <img class="rounded-t-lg" src="static/images/backdrop.jpg" alt="" />
-                                </a>
+                                
+                                    <img class="rounded-t-lg h-52 w-64" src="show_tentwala_pic.do?picPath=${tentwala_item.tentwalaItemPic}" alt="" />
+                                
                                 <div class="p-5 max-w-64 max-h-72">
-                                    <a href="#">
+                                    
                                         <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">${tentwala_item.item.name}</h5>
-                                    </a>
+                                    
                                     <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400">${tentwala_item.item.description}</p>
                                     <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"> <b>Quantity: </b>${tentwala_item.totalQuantity}</p>
                                     <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"><b>Unit Price(Rs.): </b>${tentwala_item.unitPrice}</p>
@@ -93,6 +93,15 @@
         want_bec_tentw.classList.add("hidden");
     </script>
     <!-- ----------------HIDDING----------------------- -->
+    
+   <!-- ------------------Display Tentwala Name------------------ -->
+   <script>
+    let display_name=document.querySelector("#display_name");
+    let tentwala_name="${user.tentwalaName}"
+    display_name.innerHTML=tentwala_name
+  </script>
+  <!-- ------------------Display Tentwala Name------------------ -->
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

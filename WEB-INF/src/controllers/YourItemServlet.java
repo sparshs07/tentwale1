@@ -29,7 +29,7 @@ public class YourItemServlet extends HttpServlet{
         Integer userId=user.getUserId();
 
         ArrayList<TentwalaItem> tentwalaItems=TentwalaItem.getItems(userId);
-        request.setAttribute("tentwala_items", tentwalaItems);
+        session.setAttribute("tentwala_items", tentwalaItems);
             
         ArrayList<ItemType> itemTypes=ItemType.getItemType();
         session.setAttribute("your_item_types", itemTypes);

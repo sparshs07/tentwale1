@@ -15,17 +15,28 @@
     <!-- ##############HEADER################## -->
 
     <!-- ----------------BODY-------------------- -->
-    
+   
+
 
     <!-- ----------------BODY-------------------- -->
 
     <!-- #################FOOTER#################### -->
-    <!-- <div class="min-h-screen flex flex-col">
-        <div class="fixed bottom-0 left-0 right-0"> -->
+    <div class="min-h-screen flex flex-col">
+        <div class="fixed bottom-0 left-0 right-0">
             <c:import url="footer.jsp" />
-        <!-- </div>
-    </div> -->
+        </div>
+    </div>
     <!-- #################FOOTER#################### -->
+
+    <script>
+        let about=document.querySelector("#about")
+        about.innerText="Find TentWale!"
+        about.href="find_tentwale.do"
+
+        let service=document.querySelector("#services")
+        service.classList.add("hidden")
+        
+    </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>
 </html>
