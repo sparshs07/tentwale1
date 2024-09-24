@@ -94,13 +94,13 @@
     </script>
     <!-- ----------------HIDDING----------------------- -->
     
-   <!-- ------------------Display Tentwala Name------------------ -->
+   <!-- ------------------Display Tentwala Name in dropdown------------------ -->
    <script>
     let display_name=document.querySelector("#display_name");
     let tentwala_name="${user.tentwalaName}"
     display_name.innerHTML=tentwala_name
   </script>
-  <!-- ------------------Display Tentwala Name------------------ -->
+  <!-- ------------------Display Tentwala Name in drop down------------------ -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>

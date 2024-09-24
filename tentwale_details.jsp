@@ -20,46 +20,18 @@
             <h1 class="text-4xl font-bold mb-6">Tentwale near you!</h1>
     
             <div class="grid grid-rows sm:grid-rows lg:grid-rows gap-8">
-                   
-                <div class="p-2 h-24 bg-blue-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl flex flex-row justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold mb-2">Tentwala Name</h2>
-                        <p class="text-gray-700 mb-4">Location: City, Country</p>
-                    </div>
-                    <div class="mt-6 mr-4">
-                        <a href="#" class=" bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700">Explore TentHouse</a>
-                    </div>
-                </div>
 
-                <div class="p-2 h-24 bg-blue-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl flex flex-row justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold mb-2">Tentwala Name</h2>
-                        <p class="text-gray-700 mb-4">Location: City, Country</p>
+                <c:forEach var="tentwala_detail" items="${tentwale_details}" varStatus="cn">
+                    <div class="p-2 h-24 bg-blue-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl flex flex-row justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold mb-2">${tentwala_detail.tentwalaName}</h2>
+                            <p class="text-gray-700 mb-4">${tentwala_detail.address},${pin}</p>
+                        </div>
+                        <div class="mt-6 mr-4">
+                            <a href="show_tentwala_details.do?tentwala_id=${tentwala_detail.userId}" class=" bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"><b>Explore TentHouse</b></a>
+                        </div>
                     </div>
-                    <div class="mt-6 mr-4">
-                        <a href="#" class=" bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700">Explore TentHouse</a>
-                    </div>
-                </div>
-
-                <div class="p-2 h-24 bg-blue-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl flex flex-row justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold mb-2">Tentwala Name</h2>
-                        <p class="text-gray-700 mb-4">Location: City, Country</p>
-                    </div>
-                    <div class="mt-6 mr-4">
-                        <a href="#" class=" bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700">Explore TentHouse</a>
-                    </div>
-                </div>
-
-                <div class="p-2 h-24 bg-blue-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl flex flex-row justify-between">
-                    <div>
-                        <h2 class="text-xl font-bold mb-2">Tentwala Name</h2>
-                        <p class="text-gray-700 mb-4">Location: City, Country</p>
-                    </div>
-                    <div class="mt-6 mr-4">
-                        <a href="#" class=" bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700">Explore TentHouse</a>
-                    </div>
-                </div>
+                </c:forEach>
 
                 </div>
             </div>

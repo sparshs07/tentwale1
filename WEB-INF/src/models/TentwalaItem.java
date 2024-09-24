@@ -18,6 +18,12 @@ public class TentwalaItem {
     public TentwalaItem(){
 
     }
+    public TentwalaItem(Integer tentwalaItemId, Item item,Integer unitPrice,String tentwalaItemPic){
+        this.tentwalaItemId=tentwalaItemId;
+        this.item=item;
+        this.unitPrice=unitPrice;
+        this.tentwalaItemPic=tentwalaItemPic;
+    }
 
     public TentwalaItem(Integer tentwalaItemId,Item item,Integer totalQuantity,Integer unitPrice,String tentwalaItemPic){
         this.tentwalaItemId=tentwalaItemId;

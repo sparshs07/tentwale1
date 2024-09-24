@@ -2,16 +2,28 @@
 
 <!-- ------------------------------NAVBAR---------------------START -->
 <nav class="bg-gray-800 border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-9 p-3">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-9 p-3">
     <a href="index.do" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="static/images/shardayyy-photography-fJzmPe-a0eU-unsplash.jpg" class="h-8" alt="Flowbite Logo" />
         <span class="self-center text-white text-2xl font-semibold whitespace-nowrap dark:text-white">TentWale</span>
     </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-          <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="static/images/user.png" alt="user photo">
-        </button>
+    
+    <div class="flex items-center md:order-2 space-x-5 md:space-x-0 rtl:space-x-reverse">
+
+    <!-- --------------------------CART LOGO---------------------------------------   -->
+      
+  <button type="button" data-modal-target="default-modal-1" data-modal-toggle="default-modal-1" id="cart" class="mr-4 hidden relative inline-flex items-center p-1 text-sm font-medium text-center text-white bg-gray-700 rounded-full hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      <img class="w-8 h-8 rounded-full" src="static/images/cart.png" alt="user photo">
+      <div class="hidden absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900"></div>
+  </button>
+  
+    <!-- --------------------------CART LOGO---------------------------------------   -->
+
+      <button type="button" class="flex text-sm bg-gray-800 rounded-full  md:me-0 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+        <span class="sr-only">Open user menu</span>
+        <img class="w-8 h-8 rounded-full" src="static/images/user.png" alt="user photo">
+      </button>
+
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
@@ -39,6 +51,8 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
           </svg>
       </button>
+
+
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
       <ul class="flex flex-col font-medium pt-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-700 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-800 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">

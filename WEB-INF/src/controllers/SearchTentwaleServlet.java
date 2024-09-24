@@ -25,6 +25,7 @@ public class SearchTentwaleServlet extends HttpServlet{
             ArrayList<User> tentwaleDetails=User.getTentwaleDetails(pincode); 
             if(!tentwaleDetails.isEmpty()){
                 forwardPage="tentwale_details.jsp";
+                request.setAttribute("pin",pincode);
                 session.setAttribute("tentwale_details",tentwaleDetails);
             }
             else{

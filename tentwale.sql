@@ -185,8 +185,9 @@ CREATE TABLE invoice
 
     constraint fk_invoice_users1 foreign key (user_id) references users(user_id),
     constraint fk_invoice_users2 foreign key (user_tentwale_id) references users(user_id)
+
 );
--- #######INVOICE#########
+    -- #######INVOICE#########
 
 
 -- #######INVOICE_ITEMS#########
@@ -199,7 +200,9 @@ CREATE TABLE invoice_items
     booked_quantity int not null,
 
     constraint fk_invoiceitems_invoice foreign key (invoice_id) references invoice (invoice_id),
-    constraint fk_invoiceitems_users2 foreign key (tentwala_item_id) references tentwala_items(tentwala_item_id)
+    constraint fk_invoiceitems_items foreign key (tentwala_item_id) references tentwala_items(tentwala_item_id)
 );
+
+alter table invoice_items drop column booked_quantity;
 
 -- #######INVOICE_ITEMS#########

@@ -245,6 +245,26 @@ public class User {
         return flag;
     }
 
+    public static String getEmail(Integer userId){
+        String email=null;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="select email from users where user_id=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1,userId);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                email=rs.getString("email");
+            }
+            con.close();
+        }catch(ClassNotFoundException|SQLException e){
+            e.printStackTrace();
+        }
+        return email;
+    }
+
     public static boolean checkEmail(String email){
         boolean flag=false;
         try{
