@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import models.User;
 import models.Invoice;
+import models.InvoiceItem;
 import models.Item;
 import models.ItemType;
 import models.TentwalaItem;
@@ -34,7 +35,7 @@ public class ShowTentwalaDetailsServlet extends HttpServlet {
             request.setAttribute("tentwala_contents", tentwalaContents);
 
             String tentwalaEmail=User.getEmail(tentwalaId);
-            request.setAttribute("tentwala_email", tentwalaEmail);
+            session.setAttribute("tentwala_email", tentwalaEmail);
            
 
             ArrayList<ItemType> itemTypes=ItemType.getItemType();
@@ -49,6 +50,10 @@ public class ShowTentwalaDetailsServlet extends HttpServlet {
                  Integer invoiceId=Invoice.getInvoiceId(user.getUserId(),tentwalaId);
                  
                  request.setAttribute("invoice_id", invoiceId);
+
+                 ArrayList<InvoiceItem> invoiceItems=InvoiceItem.getCartItems(invoiceId);
+                 session.setAttribute("invoice_items", invoiceItems);
+
                  
 
              request.getRequestDispatcher("tentwala_detail_page.jsp").forward(request, response);

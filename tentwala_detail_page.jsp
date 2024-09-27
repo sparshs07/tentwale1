@@ -111,7 +111,7 @@
 <div class="p-4 md:p-5 space-y-4">
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
           <tr>
               <th scope="col" class="px-16 py-3">
                   <span class="sr-only">Image</span>
@@ -123,14 +123,15 @@
                   Quantity
               </th>
               <th scope="col" class="px-6 py-3">
-                  Price
+                 Total Price
               </th>
               <th scope="col" class="px-6 py-3">
                   Action
               </th>
           </tr>
       </thead>
-      <tbody>
+      <tbody id="tbody">
+        
         
           <c:forEach var="invoice_item" items="${invoice_items}" varStatus="cn">
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -151,10 +152,10 @@
                   </div>
               </td>
               <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                  ${invoice_item.tentwalaItem.unitPrice}
+                  ${invoice_item.bookedQuantity * invoice_item.tentwalaItem.unitPrice} RS.
               </td> 
               <td class="px-6 py-4">
-                  <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                  <button  value="${invoice_item.invoiceItemId}"  id="remove_cart_item" class="remove_cart_item font-medium text-red-600 dark:text-red-500 hover:underline">Remove</button>
               </td>
               
             </tr>
@@ -166,7 +167,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="default-modal-1" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Place Order</button>
+                <a href="#" data-modal-hide="default-modal-1" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Place Order</a>
                 <button data-modal-hide="default-modal-1" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
             </div>
         </div>
@@ -203,7 +204,7 @@
         add_to_cart_btn[i].addEventListener('click',()=>{
           add_to_invoice_items(add_to_cart_btn[i].value,quantity[i].value).then((data)=>{
             if(data=="true"){
-                
+                window.location.reload();
             }
           }).catch((error)=>{
             console.log(error);
@@ -214,8 +215,10 @@
     </script>
     <script>
       let cart=document.querySelector("#cart");
+      
       cart.classList.remove("hidden");
       let invoice_id_1="${invoice_id}";
+      let tbody=document.querySelector("#tbody");
 
       let show_cart_items=async()=>{
         let response=await fetch('show_cart_items.do?invoice_id='+invoice_id_1);
@@ -224,10 +227,10 @@
       }
 
       cart.addEventListener('click',()=>{
-        
         show_cart_items().then((data)=>{
             if(data=="true"){
-                console.log("HOLA!!!!")
+
+             
             }
 
         }).catch((error)=>{
@@ -236,6 +239,8 @@
       })
 
     </script>
+
+    
 
     
 
@@ -248,6 +253,29 @@
         service.classList.add("hidden")
         
     </script>
+
+    <script>
+        let remove_cart_item=document.getElementsByClassName('remove_cart_item');
+
+      let remove_invoice_items=async(invoice_item_id)=>{
+        let response=await fetch('remove_cart_item.do?invoice_item_id='+invoice_item_id);
+        let result=await response.text();
+        return result;
+      }
+
+      for(let i=0;i<add_to_cart_btn.length ;i++){
+        remove_cart_item[i].addEventListener('click',()=>{
+          remove_invoice_items(remove_cart_item[i].value).then((data)=>{
+            if(data=="true"){
+                window.location.reload();
+            }
+          }).catch((error)=>{
+            console.log(error);
+          })
+        })
+      }
+    </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>
 </html>

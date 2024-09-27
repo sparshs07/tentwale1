@@ -23,6 +23,25 @@ public class InvoiceItem {
         this.bookedQuantity=bookedQuantity;
     }
 
+    public static Boolean removeCartItem(Integer invoiceItemId){
+        Boolean flag=false;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="delete from invoice_items where invoice_item_id=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setInt(1,invoiceItemId);
+            int x=ps.executeUpdate();
+            if(x==1){
+                flag=true;
+            }
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
     //Other Methods
 
     public static ArrayList<InvoiceItem> getCartItems(Integer invoiceId){
