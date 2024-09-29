@@ -44,6 +44,8 @@ public class InvoiceItem {
 
     //Other Methods
 
+    
+
     public static ArrayList<InvoiceItem> getCartItems(Integer invoiceId){
 
         ArrayList<InvoiceItem> cartItems=new ArrayList<>();

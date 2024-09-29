@@ -15,7 +15,21 @@
     <!-- ##############HEADER################## -->
 
     <!-- ----------------BODY-------------------- -->
-<div class="max-w-7xl ml-32 mt-9 mb-9 ">
+    
+    <!-- -------------------------CART ITEM ADDED----------------------------------- -->
+    <div id="toast-simple" class="hidden fixed top-5 right-1/2 flex items-center w-full max-w-xs  p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" role="alert">
+    
+      <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+        </svg>
+      </div>
+    
+      <div class="ps-4 text-sm font-normal">Item added successfully.</div>
+    </div>
+    <!-- -------------------------CART ITEM ADDED----------------------------------- -->
+    
+    <div class="max-w-7xl ml-32 mt-9 mb-9 ">
     
   
   <c:forEach var="tentwala_item_type" items="${tentwala_item_types}" varStatus="cn">
@@ -43,7 +57,7 @@
                           
                           <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400">${tentwala_content.item.description}</p>
                           <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"> <b>Available Quantity: </b>${tentwala_content.totalQuantity}</p>
-                          <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"><b>Unit Price(Rs.): </b>${tentwala_content.unitPrice}</p>
+                          <p class="mb-3 text-wrap text-sm font-normal text-gray-700 dark:text-gray-400"><b>Unit Price/Day(Rs.): </b>${tentwala_content.unitPrice}</p>
                           
                           <!-- <label for="bedrooms-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose quantity:</label> -->
                           <div class="relative flex items-center max-w-[15rem] mb-2">
@@ -123,7 +137,7 @@
                   Quantity
               </th>
               <th scope="col" class="px-6 py-3">
-                 Total Price
+                 Total Price/Day
               </th>
               <th scope="col" class="px-6 py-3">
                   Action
@@ -167,7 +181,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <a href="#" data-modal-hide="default-modal-1" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Place Order</a>
+                <a href="checkout_cart.do?invoice_id=${invoice_id}" data-modal-hide="default-modal-1" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Checkout Cart</a>
                 <button data-modal-hide="default-modal-1" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
             </div>
         </div>
@@ -193,6 +207,7 @@
       let add_to_cart_btn=document.getElementsByClassName("add_to_cart");
       let invoice_id="${invoice_id}";
       let quantity=document.getElementsByClassName("quantity");
+      let simple_toast=document.querySelector("#toast-simple");
 
       let add_to_invoice_items=async(tentwala_item_id,quantity)=>{
         let response=await fetch('add_invoice_items.do?invoice_id='+invoice_id+'&tentwala_item_id='+tentwala_item_id+'&quantity='+quantity);
@@ -204,7 +219,9 @@
         add_to_cart_btn[i].addEventListener('click',()=>{
           add_to_invoice_items(add_to_cart_btn[i].value,quantity[i].value).then((data)=>{
             if(data=="true"){
-                window.location.reload();
+              setTimeout(function(){ simple_toast.classList.remove('hidden');}, 300);
+                setTimeout(function(){ window.location.reload();}, 1500);
+                
             }
           }).catch((error)=>{
             console.log(error);

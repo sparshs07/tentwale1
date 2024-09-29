@@ -9,7 +9,16 @@ public class Invoice {
     private  User user;
     private User userTentwale;
     private Date bookedOn;
+    private Date bookedTo;
     private Integer bookedDays;
+   
+
+    private String deliveryAddress;
+    private String deliveryEmail;
+    private String deliveryPhone;
+
+
+   
 
     //Constructors
      public Invoice(){
@@ -17,6 +26,38 @@ public class Invoice {
     }
    
     //Other Methods
+
+    public static Boolean addCheckoutData(Integer invoiceId,Date bookedOn,Date bookedTo,Integer bookedDays,String deliveryEmail,String deliveryAddress,String deliveryPhone){
+        boolean flag=false;
+        java.sql.Date bo=new java.sql.Date(bookedOn.getTime());
+        java.sql.Date bt=new java.sql.Date(bookedOn.getTime());
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/tentwaledb?user=root&password=1234");
+            String query="update invoice set booked_on=?,booked_to=?,booked_days=?,delivery_email=?,delivery_address=?,delivery_phone=? where invoice_id=?";
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setDate(1,bo);
+            ps.setDate(2,bt);
+            
+            ps.setInt(3,bookedDays);
+            ps.setString(4,deliveryEmail);
+            ps.setString(5,deliveryAddress);
+            ps.setString(6,deliveryPhone);
+            ps.setInt(7,invoiceId);
+
+            int x=ps.executeUpdate();
+
+            if(x==1){
+                flag=true;
+            }
+
+            con.close();
+
+        }catch(SQLException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
 
     public static Boolean createRecord(Integer userId, Integer userTentwalaId) {
         Boolean flag = false;
@@ -110,11 +151,42 @@ public class Invoice {
         this.bookedOn = bookedOn;
     }
 
+    public Date getBookedTo() {
+        return bookedTo;
+    }
+
+    public void setBookedTo(Date bookedTo) {
+        this.bookedTo = bookedTo;
+    }
+
     public Integer getBookedDays() {
         return bookedDays;
     }
 
     public void setBookedDays(Integer bookedDays) {
         this.bookedDays = bookedDays;
+    }
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public void setDeliveryEmail(String deliveryEmail){
+        this.deliveryEmail=deliveryEmail;
+    }
+
+    public String getDeliveryEmail(){
+        return deliveryEmail;
+    }
+
+    public String getDeliveryPhone() {
+        return deliveryPhone;
+    }
+
+    public void setDeliveryPhone(String deliveryPhone) {
+        this.deliveryPhone = deliveryPhone;
     }
 }

@@ -49,7 +49,7 @@ public class ShowTentwalaDetailsServlet extends HttpServlet {
                  
                  Integer invoiceId=Invoice.getInvoiceId(user.getUserId(),tentwalaId);
                  
-                 request.setAttribute("invoice_id", invoiceId);
+                 session.setAttribute("invoice_id", invoiceId);
 
                  ArrayList<InvoiceItem> invoiceItems=InvoiceItem.getCartItems(invoiceId);
                  session.setAttribute("invoice_items", invoiceItems);
